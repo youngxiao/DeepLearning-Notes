@@ -172,7 +172,7 @@ static inline float leaky_activate(float x){return (x>0) ? x : .1*x;}
 
 YOLO 中采用 **sum-squared error** 来计算总的 loss，具体如下：
 
-<div align=center><img src="https://github.com/youngxiao/DeepLearning-Notes/raw/master/pic/yolo5.png"/></div>
+<div align=center><img height="600" src="https://github.com/youngxiao/DeepLearning-Notes/raw/master/pic/yolo5.png"/></div>
 
 
 
