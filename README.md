@@ -31,7 +31,7 @@ YOLOv1 早已过时，但历史总是重要的，为了完整性，还是记录�
 - **Two stage Detection**，以 **RCNN** 为代表，第一阶段由 **selective search** 生成大量 **region proposals**，即边界框，将取得的这些 proposal 通过 CNN （文中用的 AlexNet）来提取特征。第二阶段，分类器对上一阶段生成的边界框内的子图像分类，当然 RCNN 也有升级版的 Fast RCNN 和 Faster RCNN。
 - **Unified Detection**，以 YOLO 和 SSD 为代表，YOLO 直接采用 regression 的方法进行 bbox 的检测以及分类，使用一个 **end-to-end** 的简单网络，直接实现坐标回归与分类，如论文中的原图：
 
-![](/home/young/Pictures/Screenshot from 2018-12-07 11-46-13.png)
+![](/home/young/xy/md/pic/yolo1.png)
 
 
 
@@ -56,7 +56,7 @@ define confidence = Pr(object)*IOU(truth,pred)
 >
 > 补充2：如果 grid cell 包含 object 中心时， Pr(object) = 1，那么 confidence = IOU(truth,pred)
 
-![](/home/young/Pictures/Screenshot from 2018-12-07 11-43-34.png)
+![](/home/young/xy/md/pic/yolo2.png)
 
 
 
@@ -71,7 +71,11 @@ define confidence = Pr(object)*IOU(truth,pred)
 c = confidence，等价于 IOU(truth,pred)
 ```
 
-![](/home/young/xy/md/grid-cell.png)
+![](/home/young/xy/md/pic/yolo3.png)
+
+
+
+
 
 - 每一个 grid cell 要预测出 **C** 个类别概率值，表示该 grid cell 在包含 object 的条件下属于某个类别的概率，即 Pr(class-i|object），测试时将该条件概率乘上每个 bbox 的 confidence，得到每个 bbox 属于**某个类别的 conf.score**（class-specific confidence score）。
 
@@ -95,7 +99,7 @@ tensor 的数量 = SxSx(B*5+C)
 >
 > 如下图是 S=3，B=2，C=3 的时候
 
-![](/home/young/xy/md/grid-cell2.png)
+![yolo4](/home/young/xy/md/pic/yolo4.png)
 
 
 
@@ -168,9 +172,9 @@ static inline float leaky_activate(float x){return (x>0) ? x : .1*x;}
 
 YOLO 中采用 **sum-squared error** 来计算总的 loss，具体如下：
 
+![yolo5](/home/young/xy/md/pic/yolo5.png)
 
 
-![](/home/young/xy/md/loss.png)
 
 
 
@@ -225,13 +229,13 @@ YOLO 中采用 **sum-squared error** 来计算总的 loss，具体如下：
 
 - 首先直接看 YOLO 模型的输出，如下图，最后输出 7x7x30，grid cell 是 7x7，然后每个 grid cell 要对应 30 个值，前面 10 个 对应 2 个 bboxes 的（x, y, w, h, c），后面 20 个对应 20 个类别的条件概率，将 置信度 与条件概率得到 confidence score。每一个 bbox 对应 20x1 的 confidence score.
 
-![](/home/young/xy/md/bbox1.png)
+![yolo6](/home/young/xy/md/pic/yolo6.png)
 
 
 
 - **遍历所有的 grid cell** 就可以的到，如下图。
 
-![](/home/young/xy/md/bbox2.png)
+![yolo7](/home/young/xy/md/pic/yolo7.png)
 
 
 
@@ -243,7 +247,7 @@ YOLO 中采用 **sum-squared error** 来计算总的 loss，具体如下：
 
   然后用 **NMS** 进一步筛选掉多余的 bbox.
 
-![](/home/young/xy/md/bbox3.png)
+![yolo8](/home/young/xy/md/pic/yolo8.png)
 
 
 
@@ -254,7 +258,7 @@ YOLO 中采用 **sum-squared error** 来计算总的 loss，具体如下：
 
 当时，YOLO 算法与其他 state-of-the-art 的对比
 
-![](/home/young/Pictures/results1.png)
+![yolo9](/home/young/xy/md/pic/yolo9.png)
 
 
 
@@ -277,7 +281,6 @@ YOLO 中采用 **sum-squared error** 来计算总的 loss，具体如下：
 - [SSD: Single Shot Multibox Detector](https://arxiv.org/pdf/1512.02325.pdf)
 - [YOLO ppt](https://docs.google.com/presentation/d/1aeRvtKG21KHdD5lg6Hgyhx5rPq_ZOsGjG5rJ1HP7BbA/pub?start=false&loop=false&delayms=3000#slide=id.p)
 - [A nice YOLO Blog](https://hackernoon.com/understanding-yolo-f5a74bbc7967)
-
 
 
 
