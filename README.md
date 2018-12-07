@@ -31,6 +31,7 @@ YOLOv1 早已过时，但历史总是重要的，为了完整性，还是记录�
 - **Two stage Detection**，以 **RCNN** 为代表，第一阶段由 **selective search** 生成大量 **region proposals**，即边界框，将取得的这些 proposal 通过 CNN （文中用的 AlexNet）来提取特征。第二阶段，分类器对上一阶段生成的边界框内的子图像分类，当然 RCNN 也有升级版的 Fast RCNN 和 Faster RCNN。
 - **Unified Detection**，以 YOLO 和 SSD 为代表，YOLO 直接采用 regression 的方法进行 bbox 的检测以及分类，使用一个 **end-to-end** 的简单网络，直接实现坐标回归与分类，如论文中的原图：
 
+<div align=center><img src="https://github.com/youngxiao/DeepLearning-Notes/raw/master/pic/yolo1.png"/></div>
 ![](/home/young/xy/md/pic/yolo1.png)
 
 
