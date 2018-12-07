@@ -2,11 +2,11 @@
 #  YOLO，you know?
 
 - [1. 前言](#1.前言)
-- [2. YOLO 如何实现](#2.YOLO 如何实现)
-- [3. YOLO 网络结构](#3.YOLO 网络结构)
-- [4. YOLO 损失函数](#4.YOLO 损失函数)
-- [5. YOLO 训练](#5.YOLO 训练)
-- [6. YOLO detection 过程](#5.YOLO detection 过程)
+- [2. YOLO 如何实现](#2.YOLO如何实现)
+- [3. YOLO 网络结构](#3.YOLO网络结构)
+- [4. YOLO 损失函数](#4.YOLO损失函数)
+- [5. YOLO 训练](#5.YOLO训练)
+- [6. YOLO detection 过程](#5.YOLO detection过程)
 - [7. 总结](#7.总结)
 - [links](#links)
 
