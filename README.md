@@ -32,7 +32,6 @@ YOLOv1 早已过时，但历史总是重要的，为了完整性，还是记录�
 - **Unified Detection**，以 YOLO 和 SSD 为代表，YOLO 直接采用 regression 的方法进行 bbox 的检测以及分类，使用一个 **end-to-end** 的简单网络，直接实现坐标回归与分类，如论文中的原图：
 
 <div align=center><img src="https://github.com/youngxiao/DeepLearning-Notes/raw/master/pic/yolo1.png"/></div>
-![](/home/young/xy/md/pic/yolo1.png)
 
 
 
@@ -57,7 +56,7 @@ define confidence = Pr(object)*IOU(truth,pred)
 >
 > 补充2：如果 grid cell 包含 object 中心时， Pr(object) = 1，那么 confidence = IOU(truth,pred)
 
-![](/home/young/xy/md/pic/yolo2.png)
+<div align=center><img src="https://github.com/youngxiao/DeepLearning-Notes/raw/master/pic/yolo2.png"/></div>
 
 
 
@@ -72,7 +71,7 @@ define confidence = Pr(object)*IOU(truth,pred)
 c = confidence，等价于 IOU(truth,pred)
 ```
 
-![](/home/young/xy/md/pic/yolo3.png)
+<div align=center><img src="https://github.com/youngxiao/DeepLearning-Notes/raw/master/pic/yolo3.png"/></div>
 
 
 
@@ -100,7 +99,7 @@ tensor 的数量 = SxSx(B*5+C)
 >
 > 如下图是 S=3，B=2，C=3 的时候
 
-![yolo4](/home/young/xy/md/pic/yolo4.png)
+<div align=center><img src="https://github.com/youngxiao/DeepLearning-Notes/raw/master/pic/yolo4.png"/></div>
 
 
 
@@ -173,7 +172,7 @@ static inline float leaky_activate(float x){return (x>0) ? x : .1*x;}
 
 YOLO 中采用 **sum-squared error** 来计算总的 loss，具体如下：
 
-![yolo5](/home/young/xy/md/pic/yolo5.png)
+<div align=center><img src="https://github.com/youngxiao/DeepLearning-Notes/raw/master/pic/yolo5.png"/></div>
 
 
 
@@ -230,13 +229,13 @@ YOLO 中采用 **sum-squared error** 来计算总的 loss，具体如下：
 
 - 首先直接看 YOLO 模型的输出，如下图，最后输出 7x7x30，grid cell 是 7x7，然后每个 grid cell 要对应 30 个值，前面 10 个 对应 2 个 bboxes 的（x, y, w, h, c），后面 20 个对应 20 个类别的条件概率，将 置信度 与条件概率得到 confidence score。每一个 bbox 对应 20x1 的 confidence score.
 
-![yolo6](/home/young/xy/md/pic/yolo6.png)
+<div align=center><img src="https://github.com/youngxiao/DeepLearning-Notes/raw/master/pic/yolo6.png"/></div>
 
 
 
 - **遍历所有的 grid cell** 就可以的到，如下图。
 
-![yolo7](/home/young/xy/md/pic/yolo7.png)
+<div align=center><img src="https://github.com/youngxiao/DeepLearning-Notes/raw/master/pic/yolo7.png"/></div>
 
 
 
@@ -248,7 +247,7 @@ YOLO 中采用 **sum-squared error** 来计算总的 loss，具体如下：
 
   然后用 **NMS** 进一步筛选掉多余的 bbox.
 
-![yolo8](/home/young/xy/md/pic/yolo8.png)
+<div align=center><img src="https://github.com/youngxiao/DeepLearning-Notes/raw/master/pic/yolo8.png"/></div>
 
 
 
@@ -259,7 +258,7 @@ YOLO 中采用 **sum-squared error** 来计算总的 loss，具体如下：
 
 当时，YOLO 算法与其他 state-of-the-art 的对比
 
-![yolo9](/home/young/xy/md/pic/yolo9.png)
+<div align=center><img src="https://github.com/youngxiao/DeepLearning-Notes/raw/master/pic/yolo9.png"/></div>
 
 
 
