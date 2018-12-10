@@ -31,7 +31,11 @@
 
 
 
-在这之后，另一个经典的网络 [GoogLeNet](https://arxiv.org/pdf/1409.4842v1.pdf) 的 **Inception** 结构中沿用了 NIN 中的 1x1 操作，下一小节中会详细解释 GoogLeNet 中的 1x1。是金子总会发光，然后是被应用到各个网络中去。
+在这之后，另一个经典的网络 [GoogLeNet](https://arxiv.org/pdf/1409.4842v1.pdf) 的 **Inception** 结构中沿用了 NIN 中的 1x1 操作，如下图。是金子总会发光，然后是被应用到各个网络中去。
+
+
+
+<div align=center><img src="https://github.com/youngxiao/DeepLearning-Notes/raw/master/pic/1conv3.png"/></div>
 
 
 
@@ -42,31 +46,26 @@
 
 - **降维和升维**
 
-  简单的解释**降维**，例如，input 的 feature maps 是 16x16，channel=32，通过 一个 1x1，filters 数量为 8 卷积层，output 为 16x16x8。更深入的解释，以 GoogLeNet 的 Inception 模块为例，如下图 a 为最原始的 Inception，下图 b 中改进，引入 1x1 卷积，目的是：
+  简单的解释**降维**，例如，input 的 feature maps 是 16x16，channel=32，通过 一个 1x1，filters 数量为 8 卷积层，output 为 16x16x8。更深入的解释，以下图为例，如下图 a 为最原始的卷积，下图 b 中改进，引入 1x1 卷积，目的是：
 
   - 在网络中增加 1x1 卷积，**使得网络更深**
   - 网络的深度增加并没有增加权重参数的负担，反而大大减少，因为 feature maps 在输入到 3x3 或者 5x5 卷积时，**先经过 1x1，已经降低了维度。模型效果并没有降低**？（没有，这跟 1x1 卷积的后面几点作用有关）。如下例子，**参数数量大大减少**，随着网络深度加深，会成倍减少。
   ```c
-  // 假设，补充在这里设置下图 a,b 中 1x1 卷积均为 1x1x8，实际网络可以并不相同
-  input feature maps:16×16  channel:32
-  1x1 convolutional layer:1x1 channel:8
-  3x3 convolutional layer:3x3 channel:8
-  5x5 convolutional layer:5x5 channel:8
+  // 假设
+  input feature maps:28×28  channel:256
+  1x1 convolutional layer:1x1 channel:16
+  5x5 convolutional layer:5x5 channel:32
       
   // 那么
   // 1.在下图 a 中
-  卷积核参数量 = 1*1*32*8 + 3*3*32*8 + 5*5*32*8 = 8960
+  卷积核参数量 = 28x28x256x5x5x32 = 160.5M
   
   // 2.在下图 b 中
-  3x3 和 5x5 卷层之前经过了 1x1 卷积
-  输入的 size 为 16x16x32 经过 1x1 卷积后 size 为 16x16x8
-  总的卷积核参数量 = 1*1*32*8 + (1*1*32*8 + 3*3*16*8) + (1*1*32*8 + 5*5*16*8) = 5120
-  
-  很显然参数量
-      
-      通过在每次1x1卷积后立即使用ReLU来添加更多非线性。
+  5x5 卷层之前经过了 1x1 卷积
+  输入的 size 为 28x28x256 经过 1x1 卷积后 size 为 28x28x16
+  卷积核参数量 = 28x28x256x1x1x16 + 28x28x16x5x5x32 = 13.25M
   ```
-  
+
 <div align=center><img src="https://github.com/youngxiao/DeepLearning-Notes/raw/master/pic/1conv2.png"/></div>
 
 
@@ -103,5 +102,11 @@
 - [A NIN blog](https://www.cnblogs.com/makefile/p/nin.html)
 - [One by one convolution](https://iamaaditya.github.io/2016/03/one-by-one-convolution/)
 - [1x1 conv.](https://zhuanlan.zhihu.com/p/35814486)
+
+
+
+### **others**
+* Github：https://github.com/youngxiao
+* Email： yxiao2048@gmail.com
 
 
